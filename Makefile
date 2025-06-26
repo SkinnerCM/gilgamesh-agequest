@@ -80,7 +80,9 @@ test_environment:
 # PROJECT RULES                                                                 #
 #################################################################################
 
-
+## Build per-CpG correlations for selected dataset
+preprocess:  ## compute CpG–age correlations
+	$(PYTHON_INTERPRETER) -m src.pipeline.preprocess --dataset gse40279
 
 #################################################################################
 # Self Documenting Commands                                                     #
