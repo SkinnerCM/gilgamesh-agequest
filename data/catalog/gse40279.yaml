@@ -1,5 +1,5 @@
 name: gse40279
-betas: ${env:DATA_ROOT}/GSE40279/raw/hannum32.pkl      # shape (n_samples, n_cpgs)
-meta:  ${env:DATA_ROOT}/GSE40279/raw/hannum_pmeta.xlsx    # must contain sample_id + age
-cgs:   ${env:DATA_ROOT}/GSE40279/raw/hannum_cpgs.txt
+betas: ${oc.env:DATA_ROOT}/GSE40279/raw/hannum32.pkl      # shape (n_samples, n_cpgs)
+meta:  ${oc.env:DATA_ROOT}/GSE40279/raw/hannum_pmeta.xlsx    # must contain sample_id + age
+cgs:   ${0c.env:DATA_ROOT}/GSE40279/raw/hannum_cpgs.txt
 age_column: age
