@@ -76,10 +76,11 @@ target/
 .ipynb_checkpoints/
 
 # exclude data from source control by default
-/data/
+/data/*
 
 # --- keep dataset YAMLs under version control ---
 !data/catalog/
+data/catalog/*
 !data/catalog/*.yaml
 
 # Mac OS-specific storage files
