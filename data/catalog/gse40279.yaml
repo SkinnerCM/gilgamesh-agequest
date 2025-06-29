@@ -1,5 +1,8 @@
+# data/catalog/gse40279.yaml
 name: gse40279
-betas: ${oc.env:DATA_ROOT}/GSE40279/raw/hannum32.pkl      # shape (n_samples, n_cpgs)
-meta:  ${oc.env:DATA_ROOT}/GSE40279/raw/hannum_pmeta.xlsx    # must contain sample_id + age
-cgs:   ${0c.env:DATA_ROOT}/GSE40279/raw/hannum_cpgs.txt
+
+betas: "${oc.env:DATA_ROOT}/GSE40279/raw/hannum32.pkl"
+meta:  "${oc.env:DATA_ROOT}/GSE40279/raw/hannum_pmeta.xlsx"
+cgs:   "${oc.env:DATA_ROOT}/GSE40279/raw/hannum_cpgs.txt"
+
 age_column: age
