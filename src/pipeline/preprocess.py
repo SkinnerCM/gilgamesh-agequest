@@ -15,6 +15,7 @@ def load_cfg(dataset):
 def load_betas(path: Path) -> pd.DataFrame:
     if path.suffix == ".pkl":
         return pd.read_pickle(path)
+
     elif path.suffix in [".csv", ".tsv"]:
         return pd.read_csv(path, index_col=0)
     else:
@@ -39,8 +40,8 @@ def main():
     betas_path = Path(os.path.expandvars(cfg.betas))
     meta_path  = Path(os.path.expandvars(cfg.meta))
 
-    betas = load_betas(betas_path)
-    meta  = load_meta(meta_path)
+    betas = load_betas(betas_path).set_index("sample_id")
+    meta  = load_meta(meta_path).set_index("sample_id")
 
     ages  = meta.loc[betas.index, cfg.age_column]
 
