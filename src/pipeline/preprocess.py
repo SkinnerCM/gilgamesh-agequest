@@ -37,13 +37,14 @@ def main():
 
     cfg = load_cfg(args.dataset)
 
+    
     betas_path = Path(os.path.expandvars(cfg.betas))
     meta_path  = Path(os.path.expandvars(cfg.meta))
+    
+    betas = load_betas(betas_path)
+    meta  = load_meta(meta_path)
+    ages  = meta[cfg.age_column]
 
-    betas = load_betas(betas_path).set_index("sample_id")
-    meta  = load_meta(meta_path).set_index("sample_id")
-
-    ages  = meta.loc[betas.index, cfg.age_column]
 
     r = compute_correlations(betas, ages)
 
