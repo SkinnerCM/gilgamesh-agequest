@@ -84,6 +84,12 @@ test_environment:
 preprocess:  ## compute CpG–age correlations
 	$(PYTHON_INTERPRETER) -m src.pipeline.preprocess --dataset gse40279
 
+DATASET ?= gse40279
+
+## Build CpG–age noise residuals (requires existing correlation.csv)
+noise:
+	$(PYTHON_INTERPRETER) -m src.pipeline.build_noise --dataset $(DATASET)
+
 #################################################################################
 # Self Documenting Commands                                                     #
 #################################################################################
