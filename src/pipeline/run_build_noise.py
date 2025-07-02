@@ -3,6 +3,7 @@
 from pathlib import Path
 import os
 import pandas as pd
+import numpy as np
 from dotenv import load_dotenv
 from omegaconf import OmegaConf
 from src.features.build_noise import build_noise
@@ -77,7 +78,7 @@ def main():
     # 5. Save output
     out_dir = Path(args.outdir) / cfg.name
     out_dir.mkdir(parents=True, exist_ok=True)
-    noise.to_parquet(out_dir / "noise.parquet")
+    noise.to_csv(out_dir / "noise.csv", index=True)
 
     print(f"✓ Saved noise matrix for {cfg.name} → {out_dir/'noise.parquet'}")
 
