@@ -7,6 +7,7 @@ import numpy as np
 from dotenv import load_dotenv
 from omegaconf import OmegaConf
 from src.features.build_noise import build_noise
+from src.utils.io import list_writer
 
 load_dotenv()  # populate os.environ from .env
 
@@ -78,9 +79,23 @@ def main():
     # 5. Save output
     out_dir = Path(args.outdir) / cfg.name
     out_dir.mkdir(parents=True, exist_ok=True)
-    noise.to_csv(out_dir / "noise.csv", index=True)
 
-    print(f"✓ Saved noise matrix for {cfg.name} → {out_dir/'noise.parquet'}")
+        # 1) Array
+    arr = np.array(noise, dtype=np.float32)
+    # np.save(out_dir / "noise.npy", arr)
+
+    list_writer(noise.index, out_dir / "samples")
+    list_writer(noise.columns, out_dir / "cpgs")
+
+    # # 2) Row labels (samples)
+    # np.save(out_dir / "samples.npy", np.array(noise.index, dtype=object))
+
+    # # 3) Column labels (CpGs)
+    # np.save(out_dir / "cpgs.npy",    np.array(noise.columns, dtype=object))
+
+
+    print(f"✓ Saved noise array for {cfg.name} → {out_dir/'noise.npy'}")
+
 
 if __name__ == "__main__":
     main()
