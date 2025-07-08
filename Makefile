@@ -90,6 +90,14 @@ DATASET ?= gse40279
 noise:
 	$(PYTHON_INTERPRETER) -m src.pipeline.run_build_noise --dataset $(DATASET)
 
+
+## Select top‐k features by correlation or MI
+select:
+	$(PYTHON_INTERPRETER) -m src.pipeline.run_feature_selection \
+	    --dataset $(DATASET) \
+	    --method corr \
+	    --k 5000
+
 #################################################################################
 # Self Documenting Commands                                                     #
 #################################################################################
