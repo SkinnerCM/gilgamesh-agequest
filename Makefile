@@ -92,11 +92,12 @@ noise:
 
 
 ## Select top‐k features by correlation or MI
+K ?= 5000
 select:
 	$(PYTHON_INTERPRETER) -m src.pipeline.run_feature_selection \
 	    --dataset $(DATASET) \
 	    --method corr \
-	    --k 5000
+	    --k $(K)
 
 #################################################################################
 # Self Documenting Commands                                                     #
