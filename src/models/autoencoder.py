@@ -16,6 +16,8 @@ class Autoencoder(nn.Module):
     latent_dim: int
     decoder_dims: Sequence[int]
 
+    input_dim: int
+
     @nn.compact
     def __call__(self, x):
         # Encoder
@@ -31,7 +33,9 @@ class Autoencoder(nn.Module):
             x = nn.Dense(dim)(x)
             x = nn.relu(x)
         # Reconstruction
-        recon = nn.Dense(self.encoder_dims[0], name="reconstruction")(x)
+        recon = nn.Dense(self.input_dim, name="reconstruction")(x)
+
+
         return recon, z
 
     def encode(self, x):

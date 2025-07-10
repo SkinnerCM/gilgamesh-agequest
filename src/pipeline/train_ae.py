@@ -27,8 +27,10 @@ def load_selected(dataset: str, k: int, method: str = "corr") -> np.ndarray:
     return df.values.astype(np.float32)
 
 
-def create_train_state(rng, model, learning_rate):
-    params = model.init(rng, jnp.ones([1, model.encoder_dims[0]]))
+def create_train_state(rng, model, learning_rate, input_dim):
+    # params = model.init(rng, jnp.ones([1, model.encoder_dims[0]]))
+    variables = model.init(rng, jnp.ones([1, input_dim], jnp.float32))
+    params = variables["params"]            # grab only the weight dict
     tx = optax.adam(learning_rate)
     return train_state.TrainState.create(apply_fn=model.apply, params=params, tx=tx)
 
@@ -79,6 +81,10 @@ def main():
 
     # Load data
     data = load_selected(args.dataset, args.k, args.method)
+    input_dim = data.shape[1]   # this will be K, e.g. 10000
+
+
+    #Initialize RNG
     rng = jax.random.PRNGKey(0)
     rng, init_rng = jax.random.split(rng)
 
@@ -86,9 +92,11 @@ def main():
     model = Autoencoder(
         encoder_dims=args.encoder_dims,
         latent_dim=args.latent_dim,
-        decoder_dims=args.decoder_dims
+        decoder_dims=args.decoder_dims,
+        input_dim=input_dim
     )
-    state = create_train_state(init_rng, model, args.lr)
+
+    state = create_train_state(init_rng, model, args.lr, input_dim)
 
     # Training loop
     for epoch in range(1, args.epochs + 1):
