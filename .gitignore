@@ -92,3 +92,6 @@ data/catalog/*
 
 # Mypy cache
 .mypy_cache/
+
+# Ignore W&B offline run logs
+wandb/
