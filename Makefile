@@ -99,6 +99,21 @@ select:
 	    --method corr \
 	    --k $(K)
 
+## Train the autoencoder
+train_ae:
+	$(PYTHON_INTERPRETER) -m src.pipeline.train_ae \
+	  --dataset $(DATASET) --k $(K) \
+	  --encoder-dims 1024 512 --latent-dim 128 --decoder-dims 512 1024 \
+	  --batch-size 32 --epochs 50 --lr 1e-3
+
+
+## Encode data with the trained autoencoder
+eval_ae:
+	$(PYTHON_INTERPRETER) -m src.pipeline.eval_ae \
+	  --dataset $(DATASET) --k $(K) \
+	  --encoder-dims 1024 512 --latent-dim 128
+	  
+
 #################################################################################
 # Self Documenting Commands                                                     #
 #################################################################################
