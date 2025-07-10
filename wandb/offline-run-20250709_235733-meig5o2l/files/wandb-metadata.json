@@ -1,0 +1,60 @@
+{
+  "os":  "Windows-10-10.0.26100-SP0",
+  "python":  "CPython 3.11.13",
+  "startedAt":  "2025-07-10T06:57:34.105642Z",
+  "args":  [
+    "--dataset",
+    "gse40279",
+    "--k",
+    "10000",
+    "--encoder-dims",
+    "1024",
+    "512",
+    "--latent-dim",
+    "128",
+    "--decoder-dims",
+    "512",
+    "1024",
+    "--batch-size",
+    "32",
+    "--epochs",
+    "50",
+    "--lr",
+    "1e-3"
+  ],
+  "program":  "-m src.pipeline.train_ae",
+  "git":  {
+    "remote":  "https://github.com/SkinnerCM/gilgamesh-agequest.git",
+    "commit":  "edd7b6e957dbfb8b20b951e463da0edc1596ca7e"
+  },
+  "root":  "C:\\Users\\Colin\\Desktop\\gilgamesh-agequest",
+  "host":  "DESKTOP-37ME9VS",
+  "executable":  "C:\\Users\\Colin\\Anaconda3\\envs\\gilgamesh\\python.exe",
+  "cpu_count":  8,
+  "cpu_count_logical":  16,
+  "gpu":  "NVIDIA GeForce GTX 1650",
+  "gpu_count":  1,
+  "disk":  {
+    "/":  {
+      "total":  "2032175935488",
+      "used":  "1113572958208"
+    }
+  },
+  "memory":  {
+    "total":  "34073825280"
+  },
+  "cpu":  {
+    "count":  8,
+    "countLogical":  16
+  },
+  "gpu_nvidia":  [
+    {
+      "name":  "NVIDIA GeForce GTX 1650",
+      "memoryTotal":  "4294967296",
+      "cudaCores":  1024,
+      "architecture":  "Turing",
+      "uuid":  "GPU-514a1864-ef82-1efd-a46c-4feaec9802a6"
+    }
+  ],
+  "cudaVersion":  "12.5"
+}
