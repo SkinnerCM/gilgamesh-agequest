@@ -95,3 +95,6 @@ data/catalog/*
 
 # Ignore W&B offline run logs
 wandb/
+
+# Ignore saved model checkpoints and artifacts
+models/
