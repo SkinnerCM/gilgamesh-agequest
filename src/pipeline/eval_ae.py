@@ -18,12 +18,14 @@ def main():
 
     # 1) load the data you trained on
     data = load_selected(args.dataset, args.k)
+    input_dim = data.shape[1]
 
     # 2) rebuild the model
     model = Autoencoder(
         encoder_dims=args.encoder_dims,
         latent_dim=args.latent_dim,
-        decoder_dims=args.decoder_dims
+        decoder_dims=args.decoder_dims,
+        input_dim=input_dim
     )
 
     # 3) load saved params

@@ -18,6 +18,7 @@ from flax.training import train_state
 from omegaconf import OmegaConf
 from dotenv import load_dotenv
 from src.models.autoencoder import Autoencoder
+from sklearn.model_selection import train_test_split
 
 # Helper to load selected data
 
@@ -81,6 +82,9 @@ def main():
 
     # Load data
     data = load_selected(args.dataset, args.k, args.method)
+
+    train_data, val_data = train_test_split(data, test_size=0.1, random_state=42)
+
     input_dim = data.shape[1]   # this will be K, e.g. 10000
 
 
@@ -101,10 +105,13 @@ def main():
     # Training loop
     for epoch in range(1, args.epochs + 1):
         rng, input_rng = jax.random.split(rng)
-        state, train_loss = train_epoch(
-            state, data, args.batch_size, input_rng
-        )
-        wandb.log({"epoch": epoch, "train_loss": float(train_loss)})
+        state, train_loss = train_epoch(state, data, args.batch_size, input_rng)
+
+        val_recon, _ = state.apply_fn({'params': state.params},jnp.array(val_data))
+        val_loss = jnp.mean((jnp.array(val_data) - val_recon) ** 2)
+
+        wandb.log({"train_loss": float(train_loss),
+                 "val_loss":   float(val_loss)}, step=epoch)
         print(f"Epoch {epoch}, Train MSE: {train_loss:.6f}")
 
     # Save final params
